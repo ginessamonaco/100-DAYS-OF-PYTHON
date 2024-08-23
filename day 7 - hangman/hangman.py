@@ -72,10 +72,8 @@ ___|___
 ''']
 
 
-
 print("\nWelcome to hangman.")
 random_word = random.choice(word_list)
-# print(f"Shh... the word is {random_word}.")
 word_length = len(random_word)
 
 
@@ -86,14 +84,18 @@ for letter in random_word:
     space_list2.append(letter)
 print("\nThe word is:")
 print(*space_list2)
+print(f"Guesses remaining: 6")
 
 game_over = False
 
+wrong_letters = []
 lives = 6
 stage = 0
 
 while not game_over:
     print(stages[stage])
+    print(f"Past wrong guesses:")
+    print(*wrong_letters, sep = " ")
     guess = input("Guess a letter: ").lower()
 
     length = 0
@@ -107,15 +109,18 @@ while not game_over:
         length += 1
     print("The word is:")
     print(*space_list2, sep = " ")
+    print(f"Guesses remaining: {lives}")
 
     if wrong == word_length:
         lives -= 1
         stage += 1
-        print(f"\nUh oh... only {lives} chances left.")
+        wrong_letters.append(guess)
+        print(f"\nGuesses remaining: {lives}")
 
     if lives < 1:
         game_over = True
         print(stages[stage])
+        print(f"The word was: {random_word}")
         print("Your stick man was hung. You lose!")
 
     if "_" not in space_list2:
