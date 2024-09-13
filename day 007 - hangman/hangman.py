@@ -72,6 +72,7 @@ ___|___
 ''']
 
 
+
 print("\nWelcome to hangman.")
 random_word = random.choice(word_list)
 word_length = len(random_word)
